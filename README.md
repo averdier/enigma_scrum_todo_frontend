@@ -1,4 +1,4 @@
-# enigma_scrum_todo_frontend
+# Enigma | Scrum | Todo frontend
 
 ## Project setup
 ```
