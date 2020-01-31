@@ -1,22 +1,55 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
 
 Vue.use(VueRouter)
+
+const Start = () => import('../views/main/Start.vue')
+const Main = () => import('../views/main/Main.vue')
+const TodoList = () => import('../views/todo/Index.vue')
+
+const Login = () => import('../views/main/Login.vue')
+const LoginCallback = () => import('../views/oidc/Login.vue')
+const LogoutCallback = () => import('../views/oidc/Logout.vue')
 
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: Home
+    name: 'index',
+    component: Start,
+    children: [
+      {
+        path: 'main',
+        name: 'main-page',
+        component: Main,
+        children: [
+          {
+            path: 'todo',
+            name: 'todo-page',
+            component: TodoList
+          }
+        ]
+      }
+    ]
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    path: '/login',
+    name: 'login-page',
+    component: Login
+  },
+  {
+    path: '/oidc/login',
+    name: 'login-callback',
+    component: LoginCallback
+  },
+  {
+    path: '/oidc/logout',
+    name: 'logout-page',
+    component: LogoutCallback
+  },
+  {
+    path: '*',
+    name: 'fallback',
+    redirect: '/'
   }
 ]
 
