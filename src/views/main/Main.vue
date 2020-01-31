@@ -35,13 +35,8 @@
 
 <script>
 const routeGuardMain = async (to, from, next) => {
-    try {
-        
-        if (to.path === '/main') next({ name: 'todo-page' })
+    if (to.path === '/main') next({ name: 'todo-page' })
     else next()
-    } catch (error) {
-        console.log(error)
-    }
 }
 
 export default {
